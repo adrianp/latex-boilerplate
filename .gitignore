@@ -34,5 +34,6 @@
 build
 *.pdf
 *.fls
-*.lol
 *.bak
+*.xwm
+*.lol

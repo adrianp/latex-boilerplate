@@ -1,0 +1,16 @@
+%!TEX root=../main.tex
+
+\usepackage[printwatermark]{xwatermark}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\newsavebox\mybox
+\savebox\mybox{\tikz[color=red,opacity=0.1]\node{DRAFT};}
+\newwatermark*[
+  allpages,
+  angle=45,
+  scale=10,
+  xpos=-20,
+  ypos=15
+]{\usebox\mybox}
