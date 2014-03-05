@@ -4,7 +4,8 @@ Here is an example of a Figure \ref{fig:fig}.
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[scale=0.5]{static/img/pigs1.jpg}
+  % fbox will add a border around the figure
+  \fbox{\includegraphics[scale=0.5]{static/img/pigs1.jpg}}
   \caption[This is a special label, used only in the List of Figures]
           {Pigs, pigs, pigs.}
   \label{fig:fig}
