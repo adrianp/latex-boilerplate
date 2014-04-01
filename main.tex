@@ -16,16 +16,28 @@
 \usepackage{amssymb}
 \usepackage{appendix}
 \usepackage{caption}
-\usepackage{listings}
-\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{emptypage}  % no page numbers on empty pages
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,twoside]{geometry}
 \usepackage{graphicx}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lipsum}
+\usepackage{listings}
 \usepackage{makeidx}
+\usepackage{nopageno}
 \usepackage{placeins}
+\usepackage{qtree}  % for drawing trees, in texlive-humanities
 \usepackage{subcaption}
+\usepackage{titlesec}  % for customising chapter names
 
 \usepackage{epstopdf}  % load after graphic[s,x]
 
+%% single-line chapter name
+\titleformat{\chapter}{\normalfont\huge}{\thechapter.}{20pt}{\huge}
+
+%% title-case headers
+\pagestyle{myheadings}
+\renewcommand{\chaptermark}[1]{ \markboth{#1}{} }
+\renewcommand{\sectionmark}[1]{ \markright{#1}{} }
 
 %% bold float labels
 \DeclareCaptionLabelFormat{myformat}{\textbf{#1}~\textbf{#2}}
@@ -41,7 +53,7 @@
 %\setlength{\parskip}{1ex}
 
 %% Section number format
-\renewcommand*\thesection{\arabic{section}}
+%\renewcommand*\thesection{\arabic{section}}
 
 %% Give numbers to subsubsections and add them to index
 \setcounter{secnumdepth}{3}
@@ -70,12 +82,12 @@
 %\input{utils/draft.tex}
 
 \author{
-    Adrian-Tudor Panescu \\
+    Adrian-Tudor P\u{a}nescu \\
     \href{mailto:adrian@panescu.com}{adrian@panescu.com}
   \and
     John Doe
 }
-\title{LaTeX Boilerplate}
+\title{\LaTeX-Boilerplate}
 \date{}  % no date
 
 \begin{document}
@@ -86,6 +98,9 @@
   \input{utils/blank.tex}
 
   \setcounter{page}{3}
+
+  % roman page numbers before actual content
+  \pagenumbering{roman}
 
   \begin{abstract}
     \input{sections/abstract.tex}
@@ -99,55 +114,58 @@
   % next page will be odd-numbered (assumes \FloatBarrier)
   \cleardoublepage
 
-  \section{Introduction}
+  % arabic page numbers for actual content
+  \pagenumbering{arabic}
+
+  \chapter{Introduction}
     \label{sec:intro}
     \input{sections/intro/main.tex}
 
   \cleardoublepage
 
-  \section{Examples}
+  \chapter{Examples}
     \label{sec:ex}
     \input{sections/ex/main.tex}
 
     \FloatBarrier
 
-    \subsection{Algorithm}
+    \section{Algorithm}
       \label{sec:algo}
       \input{sections/ex/algo.tex}
 
     \clearpage
 
-    \subsection{Listing}
+    \section{Listing}
       \label{sec:lst}
       \input{sections/ex/lst.tex}
 
     \clearpage
 
-    \subsection{Float}
+    \section{Float}
       \label{sec:float}
       \input{sections/ex/float/main.tex}
 
       \FloatBarrier
 
-      \subsubsection{Figure}
+      \subsection{Figure}
         \label{sec:fig}
         \input{sections/ex/float/fig.tex}
 
       \FloatBarrier
 
-      \subsubsection{Subfigure}
+      \subsection{Subfigure}
         \label{sec:subfig}
         \input{sections/ex/float/subfig.tex}
 
      \clearpage
 
-    \subsection{Table}
+    \section{Table}
       \label{sec:tbl}
       \input{sections/ex/tbl.tex}
 
   \cleardoublepage
 
-  \section{Conclusions}
+  \chapter{Conclusions}
     \label{sec:outro}
     \input{sections/outro/main.tex}
 
@@ -157,6 +175,9 @@
 
   \appendixpage
   \addappheadtotoc
+
+  % appendices will be sections of a chapter, while still numbered using letters
+  \renewcommand\thesection{\Alph{section}}
 
   \appendix
     \section{An appendix}
